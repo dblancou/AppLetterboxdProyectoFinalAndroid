@@ -33,4 +33,8 @@ public class TokenManager {
         editor.remove(Constants.PREFS_KEY_AUTH_TOKEN);
         editor.apply();
     }
+
+    public void setTestToken(String token) {
+        saveToken(token);
+    }
 }

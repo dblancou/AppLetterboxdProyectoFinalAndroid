@@ -10,17 +10,30 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vedruna.appletterboxdproyectofinal.R;
+import com.vedruna.appletterboxdproyectofinal.models.LoginRequest;
+import com.vedruna.appletterboxdproyectofinal.models.AuthResponse;
+import com.vedruna.appletterboxdproyectofinal.network.ApiService;
+import com.vedruna.appletterboxdproyectofinal.network.RetrofitClient;
+import com.vedruna.appletterboxdproyectofinal.utils.TokenManager;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText userEdt, passEdt;
     private Button loginBtn;
-    private TextView registerTextView; // Agrega esta línea
+    private TextView registerTextView;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
 
+        apiService = RetrofitClient.getApiService(this);
         initView();
     }
 
@@ -28,22 +41,57 @@ public class LoginActivity extends AppCompatActivity {
         userEdt = findViewById(R.id.editTextText);
         passEdt = findViewById(R.id.editTextPassword);
         loginBtn = findViewById(R.id.loginBtn);
-        registerTextView = findViewById(R.id.textView8); // Agrega esta línea
+        registerTextView = findViewById(R.id.textView8);
 
         loginBtn.setOnClickListener(v -> {
-            if (userEdt.getText().toString().isEmpty() || passEdt.getText().toString().isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Please Fill your user and password", Toast.LENGTH_SHORT).show();
-            } else if (userEdt.getText().toString().equals("test") && passEdt.getText().toString().equals("test")) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            String username = userEdt.getText().toString().trim();
+            String password = passEdt.getText().toString().trim();
+
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Please fill in your username and password", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(LoginActivity.this, "Your user and password is not correct", Toast.LENGTH_SHORT).show();
+                performLogin(username, password);
             }
         });
 
-        // Agrega este bloque de código para manejar el clic en el texto "Regístrate ahora"
         registerTextView.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
+        });
+    }
+
+    private void performLogin(String username, String password) {
+        LoginRequest loginRequest = new LoginRequest(username, password);
+        Call<AuthResponse> call = apiService.loginUser(loginRequest);
+
+        call.enqueue(new Callback<AuthResponse>() {
+            @Override
+            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    String token = response.body().getToken();
+                    TokenManager.getInstance(LoginActivity.this).saveToken(token);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Login failed: " + response.message(), Toast.LENGTH_SHORT).show();
+                    System.out.println("Response code: " + response.code());
+                    System.out.println("Response message: " + response.message());
+                    if (response.errorBody() != null) {
+                        try {
+                            System.out.println("Error body: " + response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AuthResponse> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "An error occurred: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
         });
     }
 }
