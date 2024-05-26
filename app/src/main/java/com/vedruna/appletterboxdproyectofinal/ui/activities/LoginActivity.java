@@ -1,4 +1,4 @@
-package com.vedruna.appletterboxdproyectofinal;
+package com.vedruna.appletterboxdproyectofinal.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.vedruna.appletterboxdproyectofinal.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText userEdt, passEdt;

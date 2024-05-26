@@ -17,7 +17,7 @@
         tools:targetApi="34">
         <!-- Actividad de inicio de sesión -->
         <activity
-            android:name=".IntroActivity"
+            android:name=".ui.activities.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,16 +26,16 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="false" />
 
         <!-- Actividad principal -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
         </activity>
     </application>

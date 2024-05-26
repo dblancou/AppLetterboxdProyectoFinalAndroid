@@ -1,4 +1,4 @@
-package com.vedruna.appletterboxdproyectofinal;
+package com.vedruna.appletterboxdproyectofinal.ui.fragments;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vedruna.appletterboxdproyectofinal.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link salirFragment#newInstance} factory method to
+ * Use the {@link reviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class salirFragment extends Fragment {
+public class reviewFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class salirFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public salirFragment() {
+    public reviewFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class salirFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment salirFragment.
+     * @return A new instance of fragment reviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static salirFragment newInstance(String param1, String param2) {
-        salirFragment fragment = new salirFragment();
+    public static reviewFragment newInstance(String param1, String param2) {
+        reviewFragment fragment = new reviewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class salirFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_salir, container, false);
+        return inflater.inflate(R.layout.fragment_review, container, false);
     }
 }
