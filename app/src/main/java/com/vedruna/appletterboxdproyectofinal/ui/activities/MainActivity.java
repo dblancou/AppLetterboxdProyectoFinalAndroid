@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.vedruna.appletterboxdproyectofinal.R;
+import com.vedruna.appletterboxdproyectofinal.utils.TokenManager;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,14 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.navigation_reviews){
                 navController.navigate(R.id.reviewFragment);
             } else if (item.getItemId() == R.id.navigation_salir){
-                navController.navigate(R.id.salirFragment);
+                // Clear the token on logout
+                TokenManager.getInstance(MainActivity.this).clearToken();
+                Log.d(TAG, "Token cleared on logout");
+
+                // Redirect to login activity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
             return true;
         });

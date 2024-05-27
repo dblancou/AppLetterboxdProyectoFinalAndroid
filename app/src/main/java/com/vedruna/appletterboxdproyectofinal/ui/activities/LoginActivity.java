@@ -2,6 +2,7 @@ package com.vedruna.appletterboxdproyectofinal.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private TextView registerTextView;
     private ApiService apiService;
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void performLogin(String username, String password) {
+        // Clear any existing token before attempting to log in
+        TokenManager.getInstance(LoginActivity.this).clearToken();
+
         LoginRequest loginRequest = new LoginRequest(username, password);
         Call<AuthResponse> call = apiService.loginUser(loginRequest);
 
@@ -69,17 +74,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     String token = response.body().getToken();
+                    Log.d(TAG, "Login successful. Token received: " + token);
                     TokenManager.getInstance(LoginActivity.this).saveToken(token);
+
+                    // Log the saved token
+                    Log.d(TAG, "Saved token: " + TokenManager.getInstance(LoginActivity.this).getToken());
+
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed: " + response.message(), Toast.LENGTH_SHORT).show();
-                    System.out.println("Response code: " + response.code());
-                    System.out.println("Response message: " + response.message());
+                    Log.d(TAG, "Response code: " + response.code());
+                    Log.d(TAG, "Response message: " + response.message());
                     if (response.errorBody() != null) {
                         try {
-                            System.out.println("Error body: " + response.errorBody().string());
+                            Log.d(TAG, "Error body: " + response.errorBody().string());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
