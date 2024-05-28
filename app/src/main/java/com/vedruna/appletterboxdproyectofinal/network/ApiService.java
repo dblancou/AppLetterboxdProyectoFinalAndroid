@@ -17,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -34,8 +35,19 @@ public interface ApiService {
     @GET("/api/films/{id}")
     Call<FilmDTO> getFilmById(@Path("id") Long id);
 
+    //MODIFICACIONES 28 DE MAYO
     @GET("/api/films")
     Call<List<FilmDTO>> getAllFilms();
+
+    @GET("/api/films")
+    Call<List<FilmDTO>> getFilms(@Query("sort") String sort, @Query("limit") int limit);
+
+
+    @GET("/api/films/latest")
+    Call<List<FilmDTO>> getLatestFilms(@Query("limit") int limit);
+
+    @GET("/api/films/topRated")
+    Call<List<FilmDTO>> getTopRatedFilms(@Query("limit") int limit);
 
     @PUT("/api/films/{id}")
     Call<FilmDTO> updateFilm(@Path("id") Long id, @Body FilmDTO filmDTO);
@@ -102,4 +114,5 @@ public interface ApiService {
 
     @GET("/api/users/follows/{username}")
     Call<List<UserDTO>> getFollows(@Path("username") String username);
+
 }

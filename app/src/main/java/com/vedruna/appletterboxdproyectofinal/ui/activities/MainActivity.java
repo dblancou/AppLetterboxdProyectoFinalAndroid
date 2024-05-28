@@ -52,4 +52,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Limpiar el token al cerrar la aplicación
+        TokenManager.getInstance(this).clearToken();
+        Log.d(TAG, "Token cleared on app destroy");
+    }
 }

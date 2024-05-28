@@ -37,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
 
         apiService = RetrofitClient.getApiService(this);
         initView();
+
+        // Limpiar el token al iniciar la actividad de inicio de sesión
+        TokenManager.getInstance(LoginActivity.this).clearToken();
     }
 
     private void initView() {
