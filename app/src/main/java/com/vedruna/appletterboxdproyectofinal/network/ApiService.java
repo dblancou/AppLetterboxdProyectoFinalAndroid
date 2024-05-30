@@ -42,9 +42,15 @@ public interface ApiService {
     @GET("/api/films")
     Call<List<FilmDTO>> getFilms(@Query("sort") String sort, @Query("limit") int limit);
 
-
+    /*
     @GET("/api/films/latest")
     Call<List<FilmDTO>> getLatestFilms(@Query("limit") int limit);
+
+     */
+
+    @GET("/api/films/latest")
+    Call<List<FilmDTO>> getLatestFilms(@Query("limit") int limit, @Query("sortOrder") String sortOrder);
+
 
     @GET("/api/films/topRated")
     Call<List<FilmDTO>> getTopRatedFilms(@Query("limit") int limit);

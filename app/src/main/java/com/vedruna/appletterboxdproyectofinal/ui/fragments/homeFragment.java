@@ -37,6 +37,8 @@ public class homeFragment extends Fragment {
     private Handler sliderHandler = new Handler();
     private RecyclerView recyclerViewBestMovies;
     private ProgressBar progressBar1;
+    private SliderAdapters sliderAdapter;
+    private Runnable sliderRunnable;
 
     @Nullable
     @Override
@@ -59,7 +61,7 @@ public class homeFragment extends Fragment {
 
     private void setupViewPager() {
         List<FilmDTO> sliderItems = new ArrayList<>();
-        SliderAdapters sliderAdapter = new SliderAdapters(sliderItems);
+        sliderAdapter = new SliderAdapters(sliderItems);
         viewPager2.setAdapter(sliderAdapter);
 
         viewPager2.setClipToPadding(false);
@@ -75,18 +77,32 @@ public class homeFragment extends Fragment {
         });
 
         viewPager2.setPageTransformer(compositePageTransformer);
+
+        sliderRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = viewPager2.getCurrentItem();
+                int totalItems = sliderAdapter.getItemCount();
+                if (totalItems > 0) {
+                    int nextItem = (currentItem + 1) % totalItems;
+                    viewPager2.setCurrentItem(nextItem, true);
+                    sliderHandler.postDelayed(this, 5000); // Desplazamiento cada 5 segundos
+                }
+            }
+        };
     }
 
     private void fetchLatestFilms() {
         ApiService apiService = RetrofitClient.getApiService(getContext());
-        Call<List<FilmDTO>> call = apiService.getLatestFilms(5);
+        Call<List<FilmDTO>> call = apiService.getLatestFilms(6, "desc");
         call.enqueue(new Callback<List<FilmDTO>>() {
             @Override
             public void onResponse(Call<List<FilmDTO>> call, Response<List<FilmDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<FilmDTO> films = response.body();
-                    SliderAdapters sliderAdapter = new SliderAdapters(films);
-                    viewPager2.setAdapter(sliderAdapter);
+                    sliderAdapter.updateItems(films);
+                    // Iniciar el desplazamiento automático solo una vez aquí
+                    sliderHandler.postDelayed(sliderRunnable, 5000);
                 }
             }
 
@@ -128,13 +144,7 @@ public class homeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sliderHandler.postDelayed(sliderRunnable, 3000);
+        // No iniciar el desplazamiento aquí para evitar duplicados
+        sliderHandler.postDelayed(sliderRunnable, 0000);
     }
-
-    private Runnable sliderRunnable = new Runnable() {
-        @Override
-        public void run() {
-            viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
-        }
-    };
 }

@@ -63,5 +63,9 @@ public class SliderAdapters extends RecyclerView.Adapter<SliderAdapters.SliderVi
         }
     }
 
-
+    public void updateItems(List<FilmDTO> newItems) {
+        sliderItems.clear();
+        sliderItems.addAll(newItems);
+        notifyDataSetChanged();
+    }
 }
