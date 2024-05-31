@@ -40,18 +40,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.navigation_reviews){
                 navController.navigate(R.id.reviewFragment);
             } else if (item.getItemId() == R.id.navigation_salir){
-                // Clear the token on logout
-                TokenManager.getInstance(MainActivity.this).clearToken();
-                Log.d(TAG, "Token cleared on logout");
+                navController.navigate(R.id.salirFragment); // Navegar al fragmento de salida
 
-                // Redirect to login activity
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
             }
             return true;
         });
     }
+
 
     @Override
     protected void onDestroy() {

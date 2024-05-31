@@ -55,6 +55,9 @@ public interface ApiService {
     @GET("/api/films/topRated")
     Call<List<FilmDTO>> getTopRatedFilms(@Query("limit") int limit);
 
+    @GET("/api/films/genre")
+    Call<List<FilmDTO>> getFilmsByGenre(@Query("genreName") String genreName, @Query("limit") int limit);
+
     @PUT("/api/films/{id}")
     Call<FilmDTO> updateFilm(@Path("id") Long id, @Body FilmDTO filmDTO);
 

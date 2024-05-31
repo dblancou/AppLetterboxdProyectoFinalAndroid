@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Limpiar el token al iniciar la actividad de inicio de sesión
         TokenManager.getInstance(LoginActivity.this).clearToken();
+        Log.d(TAG, "Token cleared on app");
+
     }
 
     private void initView() {
@@ -68,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     private void performLogin(String username, String password) {
         // Clear any existing token before attempting to log in
         TokenManager.getInstance(LoginActivity.this).clearToken();
+        Log.d(TAG, "Token cleared on app");
 
         LoginRequest loginRequest = new LoginRequest(username, password);
         Call<AuthResponse> call = apiService.loginUser(loginRequest);

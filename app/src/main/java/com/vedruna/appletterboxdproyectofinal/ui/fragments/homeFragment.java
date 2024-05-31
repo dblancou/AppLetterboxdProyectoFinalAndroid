@@ -36,6 +36,11 @@ public class homeFragment extends Fragment {
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
     private RecyclerView recyclerViewBestMovies;
+    private RecyclerView recyclerViewActionMovies;
+    private RecyclerView recyclerViewHorrorMovies;
+    private RecyclerView recyclerViewSuspenseMovies;
+    private RecyclerView recyclerViewSciFiMovies;
+    private RecyclerView recyclerViewAnimationMovies;
     private ProgressBar progressBar1;
     private SliderAdapters sliderAdapter;
     private Runnable sliderRunnable;
@@ -47,14 +52,29 @@ public class homeFragment extends Fragment {
 
         viewPager2 = view.findViewById(R.id.viewpagerSlider);
         recyclerViewBestMovies = view.findViewById(R.id.view1);
+        recyclerViewActionMovies = view.findViewById(R.id.view2);
+        recyclerViewHorrorMovies = view.findViewById(R.id.view3);
+        recyclerViewSuspenseMovies = view.findViewById(R.id.view4);
+        recyclerViewSciFiMovies = view.findViewById(R.id.view5);
+        recyclerViewAnimationMovies = view.findViewById(R.id.view6);
         progressBar1 = view.findViewById(R.id.progressBar1);
 
         recyclerViewBestMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewActionMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewHorrorMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewSuspenseMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewSciFiMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewAnimationMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         progressBar1.setVisibility(View.VISIBLE);
 
         setupViewPager();
         fetchLatestFilms();
         fetchBestMovies();
+        fetchFilmsByGenre("Accion", 10, recyclerViewActionMovies);
+        fetchFilmsByGenre("Terror", 10, recyclerViewHorrorMovies);
+        fetchFilmsByGenre("Suspenso", 10, recyclerViewSuspenseMovies);
+        fetchFilmsByGenre("Ciencia Ficcion", 10, recyclerViewSciFiMovies);
+        fetchFilmsByGenre("Animacion", 10, recyclerViewAnimationMovies);
 
         return view;
     }
@@ -101,8 +121,7 @@ public class homeFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<FilmDTO> films = response.body();
                     sliderAdapter.updateItems(films);
-                    // Iniciar el desplazamiento automático solo una vez aquí
-                    sliderHandler.postDelayed(sliderRunnable, 5000);
+                    sliderHandler.postDelayed(sliderRunnable, 5000); // Comenzar el deslizamiento automático
                 }
             }
 
@@ -115,7 +134,7 @@ public class homeFragment extends Fragment {
 
     private void fetchBestMovies() {
         ApiService apiService = RetrofitClient.getApiService(getContext());
-        Call<List<FilmDTO>> call = apiService.getTopRatedFilms(8);
+        Call<List<FilmDTO>> call = apiService.getTopRatedFilms(10);
         call.enqueue(new Callback<List<FilmDTO>>() {
             @Override
             public void onResponse(Call<List<FilmDTO>> call, Response<List<FilmDTO>> response) {
@@ -135,16 +154,38 @@ public class homeFragment extends Fragment {
         });
     }
 
+    private void fetchFilmsByGenre(String genreName, int limit, RecyclerView recyclerView) {
+        ApiService apiService = RetrofitClient.getApiService(getContext());
+        Call<List<FilmDTO>> call = apiService.getFilmsByGenre(genreName, limit);
+        call.enqueue(new Callback<List<FilmDTO>>() {
+            @Override
+            public void onResponse(Call<List<FilmDTO>> call, Response<List<FilmDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<FilmDTO> films = response.body();
+                    FilmListAdapter adapter = new FilmListAdapter(films);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FilmDTO>> call, Throwable t) {
+                Log.e("HomeFragment", "Error fetching " + genreName + " films", t);
+            }
+        });
+    }
+
     @Override
     public void onPause() {
         super.onPause();
         sliderHandler.removeCallbacks(sliderRunnable);
     }
 
+    /*
     @Override
     public void onResume() {
         super.onResume();
         // No iniciar el desplazamiento aquí para evitar duplicados
-        sliderHandler.postDelayed(sliderRunnable, 0000);
+        sliderHandler.postDelayed(sliderRunnable, 5000);
     }
+     */
 }
