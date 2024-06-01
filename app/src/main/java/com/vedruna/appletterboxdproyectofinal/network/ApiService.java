@@ -35,6 +35,7 @@ public interface ApiService {
     @GET("/api/films/{id}")
     Call<FilmDTO> getFilmById(@Path("id") Long id);
 
+
     //MODIFICACIONES 28 DE MAYO
     @GET("/api/films")
     Call<List<FilmDTO>> getAllFilms();

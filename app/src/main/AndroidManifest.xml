@@ -35,6 +35,9 @@
             android:name=".ui.activities.RegisterActivity"
             android:exported="false" />
 
+        <activity android:name=".ui.activities.DetailActivity" />
+
+
         <!-- Actividad principal -->
         <activity
             android:name=".ui.activities.MainActivity"

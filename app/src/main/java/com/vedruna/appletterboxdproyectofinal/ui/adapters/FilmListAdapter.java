@@ -1,6 +1,7 @@
 package com.vedruna.appletterboxdproyectofinal.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.vedruna.appletterboxdproyectofinal.R;
 import com.vedruna.appletterboxdproyectofinal.dto.FilmDTO;
+import com.vedruna.appletterboxdproyectofinal.ui.activities.DetailActivity;
 
 import java.util.List;
 
@@ -47,6 +49,12 @@ public class FilmListAdapter extends RecyclerView.Adapter<FilmListAdapter.ViewHo
                 .load(film.getPosterUrl())
                 .apply(requestOptions)
                 .into(holder.pic);
+
+        holder.pic.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("filmId", film.getFilmId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

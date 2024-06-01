@@ -1,6 +1,7 @@
 package com.vedruna.appletterboxdproyectofinal.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.vedruna.appletterboxdproyectofinal.R;
 import com.vedruna.appletterboxdproyectofinal.dto.FilmDTO;
+import com.vedruna.appletterboxdproyectofinal.ui.activities.DetailActivity;
 
 import java.util.List;
 
@@ -51,6 +53,16 @@ public class SliderAdapters extends RecyclerView.Adapter<SliderAdapters.SliderVi
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    FilmDTO film = sliderItems.get(position);
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("filmId", film.getFilmId());
+                    context.startActivity(intent);
+                }
+            });
         }
 
         void setImage(FilmDTO film) {

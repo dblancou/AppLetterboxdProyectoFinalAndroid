@@ -121,7 +121,6 @@ public class homeFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<FilmDTO> films = response.body();
                     sliderAdapter.updateItems(films);
-                    sliderHandler.postDelayed(sliderRunnable, 5000); // Comenzar el deslizamiento automático
                 }
             }
 
@@ -180,12 +179,11 @@ public class homeFragment extends Fragment {
         sliderHandler.removeCallbacks(sliderRunnable);
     }
 
-    /*
+
     @Override
     public void onResume() {
         super.onResume();
-        // No iniciar el desplazamiento aquí para evitar duplicados
         sliderHandler.postDelayed(sliderRunnable, 5000);
     }
-     */
+
 }
