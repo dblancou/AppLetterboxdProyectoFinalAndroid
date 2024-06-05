@@ -6,6 +6,9 @@
     <color name="bottom_nav_item_default_color">#B0BEC5</color> <!-- Color por defecto -->
     <color name="bottom_nav_item_selected_color">#FFFFFF</color> <!-- Color cuando está seleccionado -->
     <color name="bottom_nav_background">#2F2F2F</color>  <!-- Color barra menu -->
-    <color name="white">#FFFFFF</color>
     <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="cardBackground">#2F2F2F</color>
+    <color name="buttonNormal">#1B1B1B</color>
+    <color name="buttonPressed">#3B3B3B</color>
 </resources>

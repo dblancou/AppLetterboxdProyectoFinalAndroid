@@ -1,11 +1,13 @@
 package com.vedruna.appletterboxdproyectofinal.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.vedruna.appletterboxdproyectofinal.R;
+import com.vedruna.appletterboxdproyectofinal.ui.activities.SearchResultsActivity;
 import com.vedruna.appletterboxdproyectofinal.ui.adapters.FilmListAdapter;
 import com.vedruna.appletterboxdproyectofinal.ui.adapters.SliderAdapters;
 import com.vedruna.appletterboxdproyectofinal.dto.FilmDTO;
@@ -44,6 +47,7 @@ public class homeFragment extends Fragment {
     private ProgressBar progressBar1;
     private SliderAdapters sliderAdapter;
     private Runnable sliderRunnable;
+    private EditText searchEditText;
 
     @Nullable
     @Override
@@ -58,6 +62,7 @@ public class homeFragment extends Fragment {
         recyclerViewSciFiMovies = view.findViewById(R.id.view5);
         recyclerViewAnimationMovies = view.findViewById(R.id.view6);
         progressBar1 = view.findViewById(R.id.progressBar1);
+        searchEditText = view.findViewById(R.id.editTextText2);
 
         recyclerViewBestMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewActionMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -75,6 +80,16 @@ public class homeFragment extends Fragment {
         fetchFilmsByGenre("Suspenso", 10, recyclerViewSuspenseMovies);
         fetchFilmsByGenre("Ciencia Ficcion", 10, recyclerViewSciFiMovies);
         fetchFilmsByGenre("Animacion", 10, recyclerViewAnimationMovies);
+
+        searchEditText.setOnEditorActionListener((v, actionId, event) -> {
+            String query = searchEditText.getText().toString();
+            if (!query.isEmpty()) {
+                Intent intent = new Intent(getContext(), SearchResultsActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+            }
+            return true;
+        });
 
         return view;
     }

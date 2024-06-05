@@ -19,15 +19,14 @@ import com.vedruna.appletterboxdproyectofinal.R;
 import com.vedruna.appletterboxdproyectofinal.dto.FilmDTO;
 import com.vedruna.appletterboxdproyectofinal.ui.activities.DetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class FilmListAdapter extends RecyclerView.Adapter<FilmListAdapter.ViewHolder> {
+public class SearchFilmListAdapter extends RecyclerView.Adapter<SearchFilmListAdapter.ViewHolder> {
 
     private List<FilmDTO> films;
     private Context context;
 
-    public FilmListAdapter(List<FilmDTO> films) {
+    public SearchFilmListAdapter(List<FilmDTO> films) {
         this.films = films;
     }
 
@@ -35,7 +34,7 @@ public class FilmListAdapter extends RecyclerView.Adapter<FilmListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.viewholder_film, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.viewholder_film_search, parent, false);
         return new ViewHolder(view);
     }
 

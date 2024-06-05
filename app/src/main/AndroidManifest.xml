@@ -36,6 +36,8 @@
             android:exported="false" />
 
         <activity android:name=".ui.activities.DetailActivity" />
+        <activity android:name=".ui.activities.SearchResultsActivity" />
+
 
 
         <!-- Actividad principal -->
