@@ -35,7 +35,6 @@ public interface ApiService {
     @GET("/api/films/{id}")
     Call<FilmDTO> getFilmById(@Path("id") Long id);
 
-
     //MODIFICACIONES 28 DE MAYO
     @GET("/api/films")
     Call<List<FilmDTO>> getAllFilms();
@@ -48,7 +47,6 @@ public interface ApiService {
 
     @GET("/api/films/latest")
     Call<List<FilmDTO>> getLatestFilms(@Query("limit") int limit, @Query("sortOrder") String sortOrder);
-
 
     @GET("/api/films/topRated")
     Call<List<FilmDTO>> getTopRatedFilms(@Query("limit") int limit);
@@ -101,6 +99,11 @@ public interface ApiService {
     Call<Void> deleteReview(@Path("id") Long id);
 
     // User endpoints
+
+    // User endpoints
+    @GET("/api/users/{userId}/isFollowing")
+    Call<Boolean> isFollowing(@Path("userId") Long userId);
+
     @GET("/api/users/public/{username}")
     Call<UserDTO> getUserByUsername(@Path("username") String username);
 

@@ -1,32 +1,23 @@
 package com.vedruna.appletterboxdproyectofinal.dto;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class MovieListDTO implements Serializable {
-    private Long listId;
-    private Long userId;
+public class MovieListDTO {
+    private Long id;
     private String name;
+    private String userName; // Nombre del usuario que creó la lista
+    private Long userId; // ID del usuario que creó la lista
     private String description;
-    private LocalDateTime createdAt;
+    private boolean following;
     private List<FilmDTO> films;
 
-    // Getters and Setters
-    public Long getListId() {
-        return listId;
+    // Getters y Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setListId(Long listId) {
-        this.listId = listId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,6 +28,22 @@ public class MovieListDTO implements Serializable {
         this.name = name;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -45,12 +52,12 @@ public class MovieListDTO implements Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public boolean isFollowing() {
+        return following;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setFollowing(boolean following) {
+        this.following = following;
     }
 
     public List<FilmDTO> getFilms() {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00796B</color>
-    <color name="colorPrimaryDark">#004D40</color>
+
     <color name="colorAccent">#B0BEC5</color>
     <color name="bottom_nav_item_default_color">#B0BEC5</color> <!-- Color por defecto -->
     <color name="bottom_nav_item_selected_color">#FFFFFF</color> <!-- Color cuando está seleccionado -->
@@ -11,4 +10,5 @@
     <color name="cardBackground">#2F2F2F</color>
     <color name="buttonNormal">#1B1B1B</color>
     <color name="buttonPressed">#3B3B3B</color>
+
 </resources>
