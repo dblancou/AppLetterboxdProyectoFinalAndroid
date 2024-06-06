@@ -18,6 +18,7 @@ import com.vedruna.appletterboxdproyectofinal.network.ApiService;
 import com.vedruna.appletterboxdproyectofinal.network.RetrofitClient;
 import com.vedruna.appletterboxdproyectofinal.ui.adapters.MovieListAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,7 +57,9 @@ public class listsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<MovieListDTO>> call, Response<List<MovieListDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    adapter.updateItems(response.body());
+                    List<MovieListDTO> movieLists = response.body();
+                    Collections.reverse(movieLists); // Invertir la lista
+                    adapter.updateItems(movieLists);
                 }
                 progressBar.setVisibility(View.GONE);
             }
