@@ -35,10 +35,29 @@ public class TokenManager {
 
     public void clearToken() {
         editor.remove(Constants.PREFS_KEY_AUTH_TOKEN);
+        editor.remove("username");
+        editor.apply();
+    }
+
+    public long getUserId() {
+        return prefs.getLong("userId", -1);
+    }
+
+    public void saveUserId(long userId) {
+        editor.putLong("userId", userId);
         editor.apply();
     }
 
     public void setTestToken(String token) {
         saveToken(token);
+    }
+
+    public void saveUsername(String username) {
+        editor.putString("username", username);
+        editor.apply();
+    }
+
+    public String getUsername() {
+        return prefs.getString("username", null);
     }
 }

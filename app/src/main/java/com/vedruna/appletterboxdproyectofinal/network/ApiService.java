@@ -35,7 +35,6 @@ public interface ApiService {
     @GET("/api/films/{id}")
     Call<FilmDTO> getFilmById(@Path("id") Long id);
 
-    //MODIFICACIONES 28 DE MAYO
     @GET("/api/films")
     Call<List<FilmDTO>> getAllFilms();
 
@@ -61,6 +60,23 @@ public interface ApiService {
     Call<Void> deleteFilm(@Path("id") Long id);
 
     // MovieList endpoints
+
+    @GET("/api/movieLists/user/{userId}")
+    Call<List<MovieListDTO>> getMovieListsByUser(@Path("userId") Long userId);
+
+    @GET("/api/movieLists/user/{userId}")
+    Call<List<MovieListDTO>> getMovieListsByUserId(@Path("userId") Long userId);
+
+    @GET("/api/movieLists/byUsername/{username}")
+    Call<List<MovieListDTO>> getMovieListsByUsername(@Path("username") String username);
+
+    @POST("/api/movieLists/{listId}/addFilm/{filmId}")
+    Call<MovieListDTO> addFilmToList(@Path("listId") Long listId, @Path("filmId") Long filmId);
+
+    @DELETE("/api/movieLists/{listId}/removeFilm/{filmId}")
+    Call<MovieListDTO> removeFilmFromList(@Path("listId") Long listId, @Path("filmId") Long filmId);
+
+
     @POST("/api/movieLists")
     Call<MovieListDTO> createMovieList(@Body MovieListDTO movieListDTO);
 
@@ -99,8 +115,6 @@ public interface ApiService {
     Call<Void> deleteReview(@Path("id") Long id);
 
     // User endpoints
-
-    // User endpoints
     @GET("/api/users/{userId}/isFollowing")
     Call<Boolean> isFollowing(@Path("userId") Long userId);
 
@@ -124,5 +138,6 @@ public interface ApiService {
 
     @GET("/api/users/follows/{username}")
     Call<List<UserDTO>> getFollows(@Path("username") String username);
+
 
 }

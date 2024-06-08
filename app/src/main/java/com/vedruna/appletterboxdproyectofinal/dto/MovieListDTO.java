@@ -1,9 +1,10 @@
 package com.vedruna.appletterboxdproyectofinal.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListDTO {
-    private Long id;
+    private Long listId;
     private String name;
     private String userName; // Nombre del usuario que creó la lista
     private Long userId; // ID del usuario que creó la lista
@@ -11,13 +12,40 @@ public class MovieListDTO {
     private boolean following;
     private List<FilmDTO> films;
 
-    // Getters y Setters
-    public Long getId() {
-        return id;
+    // Constructor por defecto
+    public MovieListDTO() {
+        this.films = new ArrayList<>(); // Inicializar la lista de películas como vacía
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Constructor con parámetros (sin following)
+    public MovieListDTO(Long listId, String name, String userName, Long userId, String description, List<FilmDTO> films) {
+        this.listId = listId;
+        this.name = name;
+        this.userName = userName;
+        this.userId = userId;
+        this.description = description;
+        this.following = false; // Valor por defecto
+        this.films = films != null ? films : new ArrayList<>();
+    }
+
+    // Constructor con parámetros (con following)
+    public MovieListDTO(Long listId, String name, String userName, Long userId, String description, boolean following, List<FilmDTO> films) {
+        this.listId = listId;
+        this.name = name;
+        this.userName = userName;
+        this.userId = userId;
+        this.description = description;
+        this.following = following;
+        this.films = films != null ? films : new ArrayList<>();
+    }
+
+    // Getters y Setters
+    public Long getListId() {
+        return listId;
+    }
+
+    public void setListId(Long listId) {
+        this.listId = listId;
     }
 
     public String getName() {

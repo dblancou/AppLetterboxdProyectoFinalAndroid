@@ -5,6 +5,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ import retrofit2.Response;
 public class DetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView titleTxt, movieRateTxt, directorTextView, yearTextView, genreTextView, movieSummaryInfo;
-    private ImageView pic2, backImg;
+    private ImageView pic2, backImg, addToListImg;
     private RecyclerView recyclerViewActors, recyclerViewCategory;
     private NestedScrollView scrollView;
     private long filmId;
@@ -84,11 +85,18 @@ public class DetailActivity extends AppCompatActivity {
         genreTextView = findViewById(R.id.genreTextView);
         movieSummaryInfo = findViewById(R.id.movieSummery);
         backImg = findViewById(R.id.backImg);
+        addToListImg = findViewById(R.id.imageView5);
         recyclerViewCategory = findViewById(R.id.genreView);
         recyclerViewActors = findViewById(R.id.imagesRecycler);
         recyclerViewActors.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         backImg.setOnClickListener(v -> finish());
+
+        addToListImg.setOnClickListener(v -> {
+            Intent intent = new Intent(DetailActivity.this, ManageMovieListsActivity.class);
+            intent.putExtra("filmId", filmId);
+            startActivity(intent);
+        });
     }
 }

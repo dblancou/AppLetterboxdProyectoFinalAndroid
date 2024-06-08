@@ -37,8 +37,7 @@
 
         <activity android:name=".ui.activities.DetailActivity" />
         <activity android:name=".ui.activities.SearchResultsActivity" />
-
-
+        <activity android:name=".ui.activities.ManageMovieListsActivity" />
 
         <!-- Actividad principal -->
         <activity

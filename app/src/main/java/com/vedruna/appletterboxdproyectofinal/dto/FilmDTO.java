@@ -12,6 +12,14 @@ public class FilmDTO implements Serializable {
     private double imdbRating;
     private String posterUrl;
 
+    // Constructor vacío
+    public FilmDTO() {}
+
+    // Constructor que acepta solo filmId
+    public FilmDTO(Long filmId) {
+        this.filmId = filmId;
+    }
+
     // Getters and Setters
     public Long getFilmId() {
         return filmId;

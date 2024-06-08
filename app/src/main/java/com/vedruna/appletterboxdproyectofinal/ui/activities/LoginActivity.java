@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vedruna.appletterboxdproyectofinal.R;
+import com.vedruna.appletterboxdproyectofinal.dto.UserDTO;
 import com.vedruna.appletterboxdproyectofinal.models.LoginRequest;
 import com.vedruna.appletterboxdproyectofinal.models.AuthResponse;
 import com.vedruna.appletterboxdproyectofinal.network.ApiService;
@@ -82,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
                     String token = response.body().getToken();
                     Log.d(TAG, "Login successful. Token received: " + token);
                     TokenManager.getInstance(LoginActivity.this).saveToken(token);
+                    TokenManager.getInstance(LoginActivity.this).saveUsername(username); // Guardar el nombre de usuario
 
                     // Log the saved token
                     Log.d(TAG, "Saved token: " + TokenManager.getInstance(LoginActivity.this).getToken());
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    // Realizar una llamada adicional para obtener los datos del usuario
+                    fetchUserDetails(username);
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed: " + response.message(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Response code: " + response.code());
@@ -110,4 +111,45 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void fetchUserDetails(String username) {
+        Call<UserDTO> call = apiService.getUserByUsername(username);
+
+        call.enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserDTO user = response.body();
+                    long userId = user.getUserId();
+                    TokenManager.getInstance(LoginActivity.this).saveUserId(userId);
+
+                    // Log the saved user ID
+                    Log.d(TAG, "Saved user ID: " + TokenManager.getInstance(LoginActivity.this).getUserId());
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Failed to retrieve user details: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Response code: " + response.code());
+                    Log.d(TAG, "Response message: " + response.message());
+                    if (response.errorBody() != null) {
+                        try {
+                            Log.d(TAG, "Error body: " + response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "An error occurred: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+
 }
