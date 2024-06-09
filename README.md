@@ -67,7 +67,7 @@ La motivación principal fue crear una herramienta práctica y accesible para lo
 6. **Salir**: Opción para cerrar sesión y salir de la aplicación.
 
 ## Documentación
-Puedes encontrar la documentación completa de la API [aquí](https://github.com/dblancou/ApiLetterboxdProyectoFinal).
+Puedes encontrar la documentación completa de la APP [aquí](https://github.com/dblancou/AppLetterboxdProyectoFinalAndroid/wiki).
 
 ## Conclusión
 El proyecto "AppLetterboxdProyectoFinalAndroid" ofrece una solución completa para los entusiastas del cine, permitiendo gestionar películas, escribir reseñas y crear listas personalizadas. Con una comunidad activa y abierta a contribuciones, el proyecto puede seguir evolucionando y mejorando.
