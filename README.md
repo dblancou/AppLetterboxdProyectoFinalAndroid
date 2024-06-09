@@ -1,5 +1,5 @@
 # 🎬 El Letterboxd bueno: una aplicación Android para el cinéfilo promedio
-## Ciclo: Desarrollo de Aplicaciones Multiplataforma (DAM)
+### Ciclo: Desarrollo de Aplicaciones Multiplataforma (DAM)
 ### Alumno: Daniel Blanco Guerrero
 
 ## Índice
