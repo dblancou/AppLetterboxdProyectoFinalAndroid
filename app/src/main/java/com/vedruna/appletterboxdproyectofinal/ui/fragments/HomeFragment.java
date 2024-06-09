@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class homeFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
@@ -44,6 +44,8 @@ public class homeFragment extends Fragment {
     private RecyclerView recyclerViewSuspenseMovies;
     private RecyclerView recyclerViewSciFiMovies;
     private RecyclerView recyclerViewAnimationMovies;
+    private RecyclerView recyclerViewFantasyMovies;
+    private RecyclerView recyclerViewDocumentaryMovies;
     private ProgressBar progressBar1;
     private SliderAdapters sliderAdapter;
     private Runnable sliderRunnable;
@@ -61,6 +63,8 @@ public class homeFragment extends Fragment {
         recyclerViewSuspenseMovies = view.findViewById(R.id.view4);
         recyclerViewSciFiMovies = view.findViewById(R.id.view5);
         recyclerViewAnimationMovies = view.findViewById(R.id.view6);
+        recyclerViewFantasyMovies = view.findViewById(R.id.view7);
+        recyclerViewDocumentaryMovies = view.findViewById(R.id.view8);
         progressBar1 = view.findViewById(R.id.progressBar1);
         searchEditText = view.findViewById(R.id.editTextText2);
 
@@ -70,6 +74,8 @@ public class homeFragment extends Fragment {
         recyclerViewSuspenseMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewSciFiMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewAnimationMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewFantasyMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewDocumentaryMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         progressBar1.setVisibility(View.VISIBLE);
 
         setupViewPager();
@@ -80,6 +86,8 @@ public class homeFragment extends Fragment {
         fetchFilmsByGenre("Suspenso", 10, recyclerViewSuspenseMovies);
         fetchFilmsByGenre("Ciencia Ficcion", 10, recyclerViewSciFiMovies);
         fetchFilmsByGenre("Animacion", 10, recyclerViewAnimationMovies);
+        fetchFilmsByGenre("Fantasia", 10, recyclerViewFantasyMovies);
+        fetchFilmsByGenre("Documental", 10, recyclerViewDocumentaryMovies);
 
         searchEditText.setOnEditorActionListener((v, actionId, event) -> {
             String query = searchEditText.getText().toString();
@@ -194,11 +202,9 @@ public class homeFragment extends Fragment {
         sliderHandler.removeCallbacks(sliderRunnable);
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable, 5000);
     }
-
 }

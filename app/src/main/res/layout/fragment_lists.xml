@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2F2F2F"
-    tools:context=".ui.fragments.listsFragment">
+    tools:context=".ui.fragments.ListsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLists"
@@ -15,7 +15,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="100dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -16,7 +16,7 @@ import com.vedruna.appletterboxdproyectofinal.R;
 import com.vedruna.appletterboxdproyectofinal.ui.activities.LoginActivity;
 import com.vedruna.appletterboxdproyectofinal.utils.TokenManager;
 
-public class salirFragment extends Fragment {
+public class SalirFragment extends Fragment {
 
     private static final String TAG = "SalirFragment";
 

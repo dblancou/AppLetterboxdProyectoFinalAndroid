@@ -7,7 +7,7 @@ Muestra un mensaje de texto y un botón para confirmar la salida.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2F2F2F"
-    tools:context=".ui.fragments.salirFragment">
+    tools:context=".ui.fragments.SalirFragment">
 
     <!-- Mensaje de texto que pregunta al usuario si está seguro de querer salir -->
     <TextView

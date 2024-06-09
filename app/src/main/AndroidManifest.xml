@@ -38,6 +38,7 @@
         <activity android:name=".ui.activities.DetailActivity" />
         <activity android:name=".ui.activities.SearchResultsActivity" />
         <activity android:name=".ui.activities.ManageMovieListsActivity" />
+        <activity android:name=".ui.activities.ManageReviewActivity" />
 
         <!-- Actividad principal -->
         <activity

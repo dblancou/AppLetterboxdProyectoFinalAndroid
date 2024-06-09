@@ -6,23 +6,13 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/editListName"
+        android:id="@+id/editReviewContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la lista"
+        android:hint="Escribe tu review.."
         android:textColor="@android:color/black"
         android:layout_marginBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/editListDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Descripción de la lista"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/editListName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

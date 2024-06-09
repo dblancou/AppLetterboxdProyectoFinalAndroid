@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.homeFragment"
+        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -21,17 +21,17 @@
     </fragment>
     <fragment
         android:id="@+id/salirFragment"
-        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.salirFragment"
+        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.SalirFragment"
         android:label="fragment_salir"
         tools:layout="@layout/fragment_salir" />
     <fragment
         android:id="@+id/listsFragment"
-        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.listsFragment"
+        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.ListsFragment"
         android:label="fragment_lists"
         tools:layout="@layout/fragment_lists" />
     <fragment
         android:id="@+id/reviewFragment"
-        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.reviewFragment"
+        android:name="com.vedruna.appletterboxdproyectofinal.ui.fragments.ReviewFragment"
         android:label="fragment_review"
         tools:layout="@layout/fragment_review" />
 </navigation>

@@ -91,7 +91,11 @@ public class DetailActivity extends AppCompatActivity {
         recyclerViewActors.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        backImg.setOnClickListener(v -> finish());
+        backImg.setOnClickListener(v -> {
+            Intent intent = new Intent(DetailActivity.this, ManageReviewActivity.class);
+            intent.putExtra("filmId", filmId);
+            startActivity(intent);
+        });
 
         addToListImg.setOnClickListener(v -> {
             Intent intent = new Intent(DetailActivity.this, ManageMovieListsActivity.class);
