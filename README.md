@@ -73,10 +73,9 @@ Puedes encontrar la documentación completa de la APP [aquí](https://github.com
 El proyecto "AppLetterboxdProyectoFinalAndroid" ofrece una solución completa para los entusiastas del cine, permitiendo gestionar películas, escribir reseñas y crear listas personalizadas. Con una comunidad activa y abierta a contribuciones, el proyecto puede seguir evolucionando y mejorando.
 
 ## Contribuciones y Agradecimientos
-### Contribuciones
+
 Las contribuciones son bienvenidas. Puedes reportar errores, solicitar funcionalidades o contribuir con código siguiendo las guías del repositorio.
 
-### Agradecimientos
 Gracias a todos los que, en algún momento, nos hemos juntado en discord para sacar esto adelante.
 
 ## Licencias
